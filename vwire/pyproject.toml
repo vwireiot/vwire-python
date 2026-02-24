@@ -12,7 +12,7 @@ license = {text = "MIT"}
 # Recommended Python versions: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
 requires-python = ">=3.8,<3.14"
 authors = [
-    {name = "Vwire IoT Team", email = "support@vwireiot.com"}
+    {name = "Vwire IoT Team", email = "support@vwire.io"}
 ]
 keywords = [
     "iot",
@@ -63,8 +63,8 @@ raspberry-pi = [
 ]
 
 [project.urls]
-Homepage = "https://vwireiot.com"
-Documentation = "https://docs.vwireiot.com"
+Homepage = "https://vwire.io"
+Documentation = "https://docs.vwire.io"
 Repository = "https://github.com/vwireiot/vwire-python"
 Issues = "https://github.com/vwireiot/vwire-python/issues"
 

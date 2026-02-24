@@ -128,6 +128,6 @@ When adding new features:
 ## Questions?
 
 - Open a discussion on GitHub
-- Email: support@vwireiot.com
+- Email: support@vwire.io
 
 Thank you for contributing! 🎉

@@ -27,7 +27,7 @@ def main():
     # Loop to send alarms or quit
     while True:
         user_input = input("\nEnter alarm message (or 'q' to quit): ").strip()
-        
+
         if user_input.lower() == 'q':
             print("Exiting...")
             break
@@ -35,8 +35,20 @@ def main():
         if not user_input:
             print("Alarm message cannot be empty!")
             continue
+
+        sound = input("Enter sound (default 'default'): ").strip() or "default"
+        volume_raw = input("Enter volume (0-100, default 50): ").strip()
+        if volume_raw:
+            try:
+                volume_input = int(round(float(volume_raw)))
+            except ValueError:
+                print("Invalid volume input, using default 50")
+                volume_input = 50
+        else:
+            volume_input = 50
+        volume_input = max(0, min(100, volume_input))
         
-        if device.alarm(user_input):
+        if device.alarm(user_input, sound ,3, volume_input):
             print("✓ Alarm sent successfully!")
         else:
             print("✗ Failed to send alarm!")

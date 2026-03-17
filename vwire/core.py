@@ -432,11 +432,11 @@ class Vwire:
         result = self._mqtt.publish(topic, message, qos=1)
         return result.rc == mqtt.MQTT_ERR_SUCCESS
     
-    def alarm(self, message: str, sound: str = "default", priority: int = 1) -> bool:
+    def alarm(self, message: str, sound: str = "default", priority: int = 1, volume: int = 50) -> bool:
         """
         Send alarm notification with persistent sound/vibration.
         
-        Equivalent to Arduino's Vwire.alarm(message, sound, priority).
+        Equivalent to Arduino's Vwire.alarm(message, sound, priority, volume).
         Triggers persistent alarm on mobile device that requires user interaction.
         Note: Only available for paid plans (PRO, PRO+, ENTERPRISE).
         
@@ -444,6 +444,7 @@ class Vwire:
             message: Alarm message text
             sound: Sound file name (without .mp3 extension)
             priority: Priority level (1=normal, 2=high, 3=critical)
+            volume: Alarm volume 0-100 (default: 50)
             
         Returns:
             True if alarm was sent successfully
@@ -454,6 +455,11 @@ class Vwire:
         
         # Generate unique alarm ID
         alarm_id = f"alarm_{int(time.time() * 1000)}_{random.randint(1000, 9999)}"
+        try:
+            volume = int(round(float(volume)))
+        except (TypeError, ValueError):
+            volume = 50
+        volume = max(0, min(100, volume))
         
         alarm_data = {
             "type": "alarm",
@@ -461,6 +467,7 @@ class Vwire:
             "alarmId": alarm_id,
             "sound": sound,
             "priority": priority,
+            "volume": volume,
             "timestamp": int(time.time() * 1000)
         }
         
